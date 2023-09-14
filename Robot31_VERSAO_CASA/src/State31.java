@@ -1,0 +1,4 @@
+
+public enum State31 {
+    STOP, CLOCKWISE, COUNTER_CW, ALTERNATING, GO_CENTER
+}
