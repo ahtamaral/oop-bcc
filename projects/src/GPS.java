@@ -1,6 +1,9 @@
 public class GPS {
-    private int c; // Latitude
-    private int l; // Longitude
+    private int l; // Coordenada horizontal (x)
+    private int c; // Coordenada vertical (y)
+    
+    private int MAX_L = 40; // Considerado intervalo de 0 a MAX_L
+    private int MAX_C = 40; // Considerado intervalo de 0 a MAX_C
 
     public GPS(int c, int l) {
         this.c = c;
@@ -13,6 +16,14 @@ public class GPS {
 
     public int getL() {
         return l;
+    }
+
+    public int getMaxL() {
+        return MAX_L;
+    }
+
+    public int getMaxC() {
+        return MAX_C;
     }
 
     public void setC(int c) {
