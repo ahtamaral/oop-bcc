@@ -5,6 +5,9 @@ public class GPS31 {
     private int MAX_X = 40; // Considerando dimensões de 0 a MAX_X
     private int MAX_Y = 40; // Considerado dimensões de 0 a MAX_Y
 
+    private int ALTERNATING_X = 40;
+    private int ALTERNATING_Y = 20;
+
     public GPS31(int x, int y) {
 
         if ((x > MAX_X || x < 0) || (y > MAX_X || y < 0)) {
@@ -21,6 +24,9 @@ public class GPS31 {
 
     public int getMaxX() { return MAX_X; }
     public int getMaxY() { return MAX_Y; }
+
+    public int getAlternatingX() { return ALTERNATING_X; }
+    public int getAlternatingY() { return ALTERNATING_Y; }
 
     public void setX(int x) { this.x = x; }
     public void setY(int y) { this.y = y; }

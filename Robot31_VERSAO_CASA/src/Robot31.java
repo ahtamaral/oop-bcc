@@ -17,9 +17,9 @@ public class Robot31 {
     }
 
     public void printStudent(){
-        System.out.println("Autor");
-        System.out.println("Nome: " + this.myName);
-        System.out.println("Nome: " + this.myDRE);
+        System.out.println("Author");
+        System.out.println("Name: " + this.myName);
+        System.out.println("DRE: " + this.myDRE);
     }
 
     // Getters fundamentais.
@@ -33,6 +33,10 @@ public class Robot31 {
     public void counter_cw() { this.currentState = State31.COUNTER_CW; }
     public void alternating() { this.currentState = State31.ALTERNATING; }
     public void go_center() { this.currentState = State31.GO_CENTER; }
+
+    // Booleano usado para controlar sentido do robô na estratégia alternating.
+    // False = Clockwise. True = Counter_cw.
+    private boolean currentStrategy = false;
 
     // Espera 0.5 segundo. Usado para dar visualização melhor no output da aplicação.
     private void waitStepTime(){
@@ -117,23 +121,19 @@ public class Robot31 {
                 }
                 else 
                 if (s == State31.ALTERNATING)
-                {
-                    // No ponto (20,MAX_Y), ele alterna a estratégia para a oposta.
-                    // A estratégia inicial é CLOCKWISE.
-
-                    if (gps.getX() == 20 && gps.getY() == gps.getMaxY())
+                {   
+                    if (gps.getX() == gps.getAlternatingX() && gps.getY() == gps.getAlternatingY())
                     {
-                        System.out.println("PONTO DE TROCA.");
-                        if (getState() == State31.CLOCKWISE){
-                            counter_cw();
-                        }
-                        if (getState() == State31.COUNTER_CW){
-                            clockwise();
-                        }
+                        System.out.println("Alternating point!");
+                        currentStrategy = !currentStrategy;
                     }
-                    else
-                    {
-                        currentState = State31.CLOCKWISE;
+                    
+                    // Enquanto o robô não está no ponto de alternância, o robô segue executando uma das outras estratégias.
+                    if (currentStrategy == false){
+                        move(State31.CLOCKWISE);
+                    }
+                    else if (currentStrategy == true){
+                        move(State31.COUNTER_CW);
                     }
                 }
             }
